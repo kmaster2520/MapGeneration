@@ -8,8 +8,8 @@ Written by Sathvik Kadaveru
 """
 
 # can't do more than 30x30
-GRID_W = 30
-GRID_H = 30
+GRID_W = 20
+GRID_H = 20
 
 
 def print_grid(grid):
@@ -102,6 +102,7 @@ def wave_function_collapse(current_cell, grid):
             current_cell, grid
         )
         if min_valid == 0:
+            print("we messed up")
             return  # we effed up
         if min_valid >= 100000:
             return  # all adjacent cells filled
@@ -117,7 +118,7 @@ def main():
 
     grid = np.full((GRID_H, GRID_W), ".", dtype="U1")
     first_cell = (randint(0, GRID_H - 1), randint(0, GRID_W - 1))
-    first_cell_value = randchoice(list(MODULES.keys()))
+    first_cell_value = randchoice(get_valid_values_for_cell(first_cell, grid))
     grid[first_cell] = first_cell_value
 
     wave_function_collapse(first_cell, grid)
