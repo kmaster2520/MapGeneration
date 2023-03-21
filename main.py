@@ -13,6 +13,11 @@ GRID_H = 20
 
 
 def print_grid(grid):
+    """
+    Prints the grid
+    :param grid: The current grid
+    :return:
+    """
     shape = grid.shape
     for r in range(shape[0]):
         for c in range(shape[1]):
@@ -21,6 +26,13 @@ def print_grid(grid):
 
 
 def get_adjacent_cells(cell, shape):
+    """
+
+    :param cell: The current cell
+    :param shape: The shape of the grid
+    :return: A list of adjacent cells
+    """
+
     r, c = cell
     adjacent_cells = []
     if r > 0:
@@ -35,6 +47,12 @@ def get_adjacent_cells(cell, shape):
 
 
 def get_valid_values_for_cell(cell, grid):
+    """
+
+    :param cell: The current cell
+    :param grid: The current grid
+    :return: valid values for current cell
+    """
     r, c = cell
     shape = grid.shape
     valid = set(MODULES.keys())
@@ -76,6 +94,11 @@ def get_valid_values_for_cell(cell, grid):
 
 
 def get_num_valid_for_adjacent_cells(cell, grid):
+    """
+    :param cell: the current cell
+    :param grid: the current grid
+    :return: The smallest number of valid values for one of the adjacent cells, a dict of cells with valid values
+    """
     min_valid = 100000
     min_valid_cells = dict()
     # min_valid = the minimum value of valid values over all cells (ranges from 0 to 16)
@@ -97,6 +120,12 @@ def get_num_valid_for_adjacent_cells(cell, grid):
 
 
 def wave_function_collapse(current_cell, grid):
+    """
+    Procedurally generates a grid
+    :param current_cell:
+    :param grid:
+    :return:
+    """
     while True:
         min_valid, min_valid_cells = get_num_valid_for_adjacent_cells(
             current_cell, grid
@@ -114,6 +143,10 @@ def wave_function_collapse(current_cell, grid):
 
 
 def main():
+    """
+    The main method
+    :return:
+    """
     print("begin main")
 
     grid = np.full((GRID_H, GRID_W), ".", dtype="U1")
