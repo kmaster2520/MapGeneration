@@ -110,14 +110,16 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-n", "--name", help="name of pattern to run", default="pipes")
     parser.add_argument("-c", "--config", help="name of config to run", default=None)
+    parser.add_argument("--grid", help="show grid lines in image", action="store_true")
     args = parser.parse_args()
-    # print(args)
+    print(args)
 
     MODULE_LIST, tile_w, tile_h = generate_modules(args.name, config=args.config)
     # print(MODULE_LIST)
 
     success = False
     iteration_number = 0
+    grid = np.full((GRID_H, GRID_W), -1, np.int32)
     while not success:
         grid = np.full((GRID_H, GRID_W), -1, np.int32)
         first_cell = (randint(0, GRID_H - 1), randint(0, GRID_W - 1))
@@ -134,7 +136,7 @@ def main():
     # print_grid(grid)
     print(f"Attempt Number: {iteration_number}")
 
-    display_grid(grid, MODULE_LIST, tile_w, tile_h)
+    display_grid(grid, MODULE_LIST, (tile_w, tile_h), showGrid=args.grid)
 
 
 if __name__ == '__main__':

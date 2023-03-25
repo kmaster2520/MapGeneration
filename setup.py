@@ -3,6 +3,19 @@ from PIL import Image, ImageTk
 import tkinter as tk
 
 
+'''
+YAML config:
+
+
+connections:
+each connect has two chars, first char is the topright, lefttop, bottomleft, or rightbottom half
+basically the second half is counter clockwise of the first half
+this is done to handle asymmetric edges
+
+
+'''
+
+
 def load_yaml(name, *, config=None):
     with open(f"assets/{name}/{config}.yaml") as fin:
         try:
@@ -41,9 +54,14 @@ def generate_modules(name, *, config=None):
     return module_list, tile_w, tile_h
 
 
-def display_grid(grid, module_list, tile_w, tile_h):
+def display_grid(grid, module_list, tile_size, *, showGrid=False):
     # Create a Tkinter window and canvas
     shape = grid.shape
+
+    tile_w, tile_h = tile_size
+    if showGrid:
+        tile_w += 1
+        tile_h += 1
 
     root = tk.Tk()
     canvas = tk.Canvas(root, width=shape[1] * tile_w, height=(shape[0] + 3) * tile_h)
@@ -67,7 +85,6 @@ def display_grid(grid, module_list, tile_w, tile_h):
 
     # Start the Tkinter event loop
     root.mainloop()
-
 
 
 # key = base module, value = rotated module

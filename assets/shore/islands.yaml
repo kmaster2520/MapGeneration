@@ -1,0 +1,51 @@
+---
+name: shore
+tile:
+  width: 16
+  height: 16
+connections:
+  "w": "water"
+  "s": "shore"
+connectivity: 4
+options:
+  useBorderModule: true
+borderModules:
+  __border__:
+    connections:
+      t: [ oo ]
+      b: [ oo ]
+      l: [ oo ]
+      r: [ oo ]
+modules:
+  water:
+    imageCoords: [1, 4]
+    connections:
+      t: [ ww ]
+      b: [ ww ]
+      l: [ ww ]
+      r: [ ww ]
+    rotations: []
+  sand:
+    imageCoords: [1, 5]
+    connections:
+      t: [ ss ]
+      b: [ ss ]
+      l: [ ss ]
+      r: [ ss ]
+    rotations: []
+  halfandhalf:
+    imageCoords: [1, 1]
+    connections:
+      t: [ sw ]
+      b: [ ws ]
+      l: [ ww ]
+      r: [ ss ]
+    rotations: [90, 180, 270]
+  mostlywater:
+    imageCoords: [1, 3]
+    connections:
+      t: [ ww ]
+      b: [ ws ]
+      l: [ ww ]
+      r: [ sw ]
+    rotations: [90, 180, 270]
