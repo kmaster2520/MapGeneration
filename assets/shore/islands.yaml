@@ -43,6 +43,7 @@ modules:
       l: [ ww ]
       r: [ ss ]
     rotations: [90, 180, 270]
+    weight: 40
   mostlywater:
     imageCoords: [1, 3]
     connections:
@@ -51,3 +52,4 @@ modules:
       l: [ ww ]
       r: [ sw ]
     rotations: [90, 180, 270]
+    weight: 20
