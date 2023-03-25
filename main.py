@@ -127,7 +127,7 @@ def main():
         iteration_number += 1
         success = wave_function_collapse(first_cell, grid)
 
-        if iteration_number > 15:
+        if iteration_number > 30:
             print('no can do')
             break
 
