@@ -1,8 +1,8 @@
 ---
 name: pipes
 tile:
-  width: 3
-  height: 3
+  width: 16
+  height: 16
 connections:
   "0": "empty"
   "1": "pipe"

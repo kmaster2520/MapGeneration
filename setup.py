@@ -1,16 +1,21 @@
 import yaml
-from PIL import Image
+from PIL import Image, ImageTk
+import tkinter as tk
 
+
+def load_yaml(name, *, config=None):
+    with open(f"assets/{name}/{config}.yaml") as fin:
+        try:
+            module_config = yaml.safe_load(fin)
+            return module_config
+        except yaml.YAMLError as exc:
+            raise exc
 
 def generate_modules(name, *, config=None):
     if config is None:
         config = 'config'
 
-    with open(f"assets/{name}/{config}.yaml") as fin:
-        try:
-            module_config = yaml.safe_load(fin)
-        except yaml.YAMLError as exc:
-            raise exc
+    module_config = load_yaml(name, config=config)
 
     tile_w = module_config["tile"]["width"]
     tile_h = module_config["tile"]["height"]
@@ -32,7 +37,29 @@ def generate_modules(name, *, config=None):
 
                 module_list.append(m)
 
-    return module_list
+    return module_list, tile_w, tile_h
+
+
+def display_grid(grid, MODULE_LIST, tile_w, tile_h):
+    # Create a Tkinter window and canvas
+    shape = grid.shape
+
+    root = tk.Tk()
+    canvas = tk.Canvas(root, width=shape[1] * tile_w, height=shape[0] * tile_h)
+    canvas.pack()
+
+
+    images = []
+    for r in range(shape[0]):
+        for c in range(shape[1]):
+            image = MODULE_LIST[grid[r, c]]["image"]
+            image_tk = ImageTk.PhotoImage(image)
+            images.append(image_tk)
+            canvas.create_image(tile_h * c, tile_w * r, image=images[-1])
+
+    # Start the Tkinter event loop
+    root.mainloop()
+
 
 
 # key = base module, value = rotated module

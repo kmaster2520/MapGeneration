@@ -1,9 +1,8 @@
 import numpy as np
 from random import randint, choice as randchoice
-import tkinter as tk
 
 from util import get_cell_adjacency, has_valid_connection
-from setup import generate_modules
+from setup import generate_modules, display_grid
 
 """
 Written by Sathvik Kadaveru
@@ -11,7 +10,7 @@ Written by Sathvik Kadaveru
 """
 
 # can't do more than 30x30
-GRID_W = 20
+GRID_W = 25
 GRID_H = 20
 
 MODULE_LIST = []
@@ -105,7 +104,7 @@ def wave_function_collapse(current_cell, grid):
 
 def main():
     global MODULE_LIST
-    MODULE_LIST = generate_modules("pipes")
+    MODULE_LIST, tile_w, tile_h = generate_modules("pipes")
     # print(MODULE_LIST)
 
     success = False
@@ -121,6 +120,8 @@ def main():
 
     print_grid(grid)
     print(f"Attempt Number: {iteration_number}")
+
+    display_grid(grid, MODULE_LIST, tile_w, tile_h)
 
 
 if __name__ == '__main__':
