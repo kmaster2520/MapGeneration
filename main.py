@@ -11,7 +11,7 @@ Written by Sathvik Kadaveru
 
 # can't do more than 30x30
 GRID_W = 25
-GRID_H = 20
+GRID_H = 25
 
 MODULE_LIST = []
 
@@ -83,8 +83,6 @@ def wave_function_collapse(current_cell, grid):
     """
     while True:
         valid_values_map = get_valid_values_for_adjacent_cells(current_cell, grid)
-        if not valid_values_map:
-            return True  # all adjacent cells filled
 
         lowest_entropy = 1000000
         best_cell = None
@@ -95,7 +93,10 @@ def wave_function_collapse(current_cell, grid):
                 best_cell = adj_cell
 
         if lowest_entropy == 0:
-            return False
+            return False # messed up, need to restart
+
+        if best_cell is None:
+            return True  # all adjacent cells filled
 
         grid[best_cell] = randchoice(get_valid_values_for_cell(best_cell, grid))
         if not wave_function_collapse(best_cell, grid):

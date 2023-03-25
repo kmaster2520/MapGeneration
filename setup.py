@@ -45,7 +45,7 @@ def display_grid(grid, MODULE_LIST, tile_w, tile_h):
     shape = grid.shape
 
     root = tk.Tk()
-    canvas = tk.Canvas(root, width=shape[1] * tile_w, height=shape[0] * tile_h)
+    canvas = tk.Canvas(root, width=shape[1] * tile_w, height=(shape[0] + 3) * tile_h)
     canvas.pack()
 
 
@@ -55,7 +55,13 @@ def display_grid(grid, MODULE_LIST, tile_w, tile_h):
             image = MODULE_LIST[grid[r, c]]["image"]
             image_tk = ImageTk.PhotoImage(image)
             images.append(image_tk)
-            canvas.create_image(tile_h * c, tile_w * r, image=images[-1])
+            canvas.create_image(tile_w * c, tile_h * r, image=images[-1], anchor='nw')
+
+    for i, module in enumerate(MODULE_LIST):
+        image = MODULE_LIST[i]["image"]
+        image_tk = ImageTk.PhotoImage(image)
+        images.append(image_tk)
+        canvas.create_image(tile_w * i, tile_h * (r + 2), image=images[-1], anchor='nw')
 
     # Start the Tkinter event loop
     root.mainloop()
@@ -83,9 +89,9 @@ rotation_map = {
         "r": "l"
     },
     270: {
-        "t": "b",
-        "b": "t",
-        "l": "r",
-        "r": "l"
+        "t": "r",
+        "b": "l",
+        "l": "t",
+        "r": "b"
     }
 }
