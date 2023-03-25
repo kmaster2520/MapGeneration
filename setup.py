@@ -25,10 +25,11 @@ def generate_modules(name, *, config=None):
             for rotation in module_info["rotations"] + [0]:
                 m = dict()
                 m["name"] = f"{module_name}_{rotation}"
-                #m["image"] = tile_image.rotate(rotation)
-                m["borders"] = dict()
+                m["image"] = tile_image.rotate(rotation)
+                m["connections"] = dict()
                 for base, rotated in rotation_map[rotation].items():
-                    m["borders"][rotated] = module_info["borders"][base]
+                    m["connections"][rotated] = module_info["connections"][base]
+
                 module_list.append(m)
 
     return module_list

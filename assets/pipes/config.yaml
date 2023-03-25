@@ -3,7 +3,7 @@ name: pipes
 tile:
   width: 3
   height: 3
-borders:
+connections:
   "0": "empty"
   "1": "pipe"
 connectivity: 4
@@ -11,7 +11,7 @@ options:
   useBorderModule: true
 borderModules:
   __border__:
-    borders:
+    connections:
       t: [ 0 ]
       b: [ 0 ]
       l: [ 0 ]
@@ -19,7 +19,7 @@ borderModules:
 modules:
   empty:
     imageCoords: [1, 5]
-    borders:
+    connections:
       t: [0]
       b: [0]
       l: [0]
@@ -27,7 +27,7 @@ modules:
     rotations: []
   4way:
     imageCoords: [1, 1]
-    borders:
+    connections:
       t: [1]
       b: [1]
       l: [1]
@@ -35,7 +35,7 @@ modules:
     rotations: []
   3way:
     imageCoords: [1, 3]
-    borders:
+    connections:
       t: [1]
       b: [1]
       l: [1]
@@ -43,7 +43,7 @@ modules:
     rotations: [90, 180, 270]
   2waystraight:
     imageCoords: [1, 2]
-    borders:
+    connections:
       t: [1]
       b: [1]
       l: [0]
@@ -51,7 +51,7 @@ modules:
     rotations: [90]
   2waybent:
     imageCoords: [1, 4]
-    borders:
+    connections:
       t: [1]
       b: [0]
       l: [1]
