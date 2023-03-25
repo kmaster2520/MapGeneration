@@ -1,5 +1,6 @@
 import numpy as np
 from random import randint, choice as randchoice
+import argparse
 
 from util import get_cell_adjacency, has_valid_connection
 from setup import generate_modules, display_grid
@@ -105,7 +106,14 @@ def wave_function_collapse(current_cell, grid):
 
 def main():
     global MODULE_LIST
-    MODULE_LIST, tile_w, tile_h = generate_modules("pipes")
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-n", "--name", help="name of pattern to run", default="pipes")
+    parser.add_argument("-c", "--config", help="name of config to run", default=None)
+    args = parser.parse_args()
+    # print(args)
+
+    MODULE_LIST, tile_w, tile_h = generate_modules(args.name, config=args.config)
     # print(MODULE_LIST)
 
     success = False
@@ -119,7 +127,11 @@ def main():
         iteration_number += 1
         success = wave_function_collapse(first_cell, grid)
 
-    print_grid(grid)
+        if iteration_number > 15:
+            print('no can do')
+            break
+
+    # print_grid(grid)
     print(f"Attempt Number: {iteration_number}")
 
     display_grid(grid, MODULE_LIST, tile_w, tile_h)

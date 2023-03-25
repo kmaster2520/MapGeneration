@@ -1,0 +1,27 @@
+---
+name: pipes
+tile:
+  width: 16
+  height: 16
+connections:
+  "0": "empty"
+  "1": "pipe"
+connectivity: 4
+options:
+  useBorderModule: true
+borderModules:
+  __border__:
+    connections:
+      t: [ 0 ]
+      b: [ 0 ]
+      l: [ 0 ]
+      r: [ 0 ]
+modules:
+  2waybent:
+    imageCoords: [1, 4]
+    connections:
+      t: [1]
+      b: [0]
+      l: [1]
+      r: [0]
+    rotations: [90, 180, 270]

@@ -11,6 +11,7 @@ def load_yaml(name, *, config=None):
         except yaml.YAMLError as exc:
             raise exc
 
+
 def generate_modules(name, *, config=None):
     if config is None:
         config = 'config'
@@ -40,7 +41,7 @@ def generate_modules(name, *, config=None):
     return module_list, tile_w, tile_h
 
 
-def display_grid(grid, MODULE_LIST, tile_w, tile_h):
+def display_grid(grid, module_list, tile_w, tile_h):
     # Create a Tkinter window and canvas
     shape = grid.shape
 
@@ -48,17 +49,18 @@ def display_grid(grid, MODULE_LIST, tile_w, tile_h):
     canvas = tk.Canvas(root, width=shape[1] * tile_w, height=(shape[0] + 3) * tile_h)
     canvas.pack()
 
-
     images = []
     for r in range(shape[0]):
         for c in range(shape[1]):
-            image = MODULE_LIST[grid[r, c]]["image"]
+            if grid[r, c] < 0:
+                continue
+            image = module_list[grid[r, c]]["image"]
             image_tk = ImageTk.PhotoImage(image)
             images.append(image_tk)
             canvas.create_image(tile_w * c, tile_h * r, image=images[-1], anchor='nw')
 
-    for i, module in enumerate(MODULE_LIST):
-        image = MODULE_LIST[i]["image"]
+    for i, module in enumerate(module_list):
+        image = module_list[i]["image"]
         image_tk = ImageTk.PhotoImage(image)
         images.append(image_tk)
         canvas.create_image(tile_w * i, tile_h * (r + 2), image=images[-1], anchor='nw')
