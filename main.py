@@ -117,7 +117,7 @@ def main():
     # print(MODULE_LIST)
 
     success = False
-    iteration_number = 1
+    iteration_number = 0
     while not success:
         grid = np.full((GRID_H, GRID_W), -1, np.int32)
         first_cell = (randint(0, GRID_H - 1), randint(0, GRID_W - 1))

@@ -27,7 +27,9 @@ inverse_direction_map = {
 
 def has_valid_connection(module1, module2, direction):
     inverse_direction = inverse_direction_map[direction]
-    m1_connections = set(module1["connections"][direction])
+    m1_inverted = set()
+    for conn in module1["connections"][direction]:
+        m1_inverted.add(conn[::-1])
     m2_connections = set(module2["connections"][inverse_direction])
-    return bool(m1_connections.intersection(m2_connections))
+    return bool(m1_inverted.intersection(m2_connections))
 

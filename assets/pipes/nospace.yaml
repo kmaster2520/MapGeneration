@@ -4,48 +4,48 @@ tile:
   width: 16
   height: 16
 connections:
-  "0": "empty"
-  "1": "pipe"
+  "o": "empty"
+  "x": "pipe"
 connectivity: 4
 options:
   useBorderModule: true
 borderModules:
   __border__:
     connections:
-      t: [ 0 ]
-      b: [ 0 ]
-      l: [ 0 ]
-      r: [ 0 ]
+      t: [ oo ]
+      b: [ oo ]
+      l: [ oo ]
+      r: [ oo ]
 modules:
   4way:
     imageCoords: [1, 1]
     connections:
-      t: [1]
-      b: [1]
-      l: [1]
-      r: [1]
+      t: [ xx ]
+      b: [ xx ]
+      l: [ xx ]
+      r: [ xx ]
     rotations: []
   3way:
     imageCoords: [1, 3]
     connections:
-      t: [1]
-      b: [1]
-      l: [1]
-      r: [0]
+      t: [ xx ]
+      b: [ xx ]
+      l: [ xx ]
+      r: [ oo ]
     rotations: [90, 180, 270]
   2waystraight:
     imageCoords: [1, 2]
     connections:
-      t: [1]
-      b: [1]
-      l: [0]
-      r: [0]
+      t: [ xx ]
+      b: [ xx ]
+      l: [ oo ]
+      r: [ oo ]
     rotations: [90]
   2waybent:
     imageCoords: [1, 4]
     connections:
-      t: [1]
-      b: [0]
-      l: [1]
-      r: [0]
+      t: [ xx ]
+      b: [ oo ]
+      l: [ xx ]
+      r: [ oo ]
     rotations: [90, 180, 270]
