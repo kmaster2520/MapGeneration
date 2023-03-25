@@ -1,6 +1,6 @@
 import numpy as np
 from random import randint, choice as randchoice
-from tiles import MODULES, DIRECTION
+from tiles import MODULES, ALLOWED_MODULES, DIRECTION
 
 """
 Written by Sathvik Kadaveru
@@ -55,8 +55,8 @@ def get_valid_values_for_cell(cell, grid):
     """
     r, c = cell
     shape = grid.shape
-    valid = set(MODULES.keys())
-    for value in MODULES:
+    valid = set(ALLOWED_MODULES.keys())
+    for value in ALLOWED_MODULES:
         #
         top_value = grid[r - 1, c] if r > 0 else "═"
         if (
