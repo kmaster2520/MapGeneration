@@ -15,6 +15,8 @@ this is done to handle asymmetric edges
 
 '''
 
+DEFAULT_WEIGHT = 100
+
 
 def load_yaml(name, *, config=None):
     with open(f"assets/{name}/{config}.yaml") as fin:
@@ -41,8 +43,10 @@ def generate_modules(name, *, config=None):
             box = ((c-1)*tile_w, (r-1)*tile_h, c*tile_w, r*tile_h)
             tile_image = image.crop(box)
 
+            num_rotations = len(module_info["rotations"])
             for rotation in module_info["rotations"] + [0]:
                 m = dict()
+                m["weight"] = module_info.get("weight", DEFAULT_WEIGHT) / (num_rotations + 1)
                 m["name"] = f"{module_name}_{rotation}"
                 m["image"] = tile_image.rotate(rotation)
                 m["connections"] = dict()

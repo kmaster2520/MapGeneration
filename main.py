@@ -1,9 +1,9 @@
 import numpy as np
-from random import randint, choice as randchoice
+from random import randint, choices as randchoice
 import argparse
 
 from util import get_cell_adjacency, has_valid_connection
-from setup import generate_modules, display_grid
+from setup import generate_modules, display_grid, DEFAULT_WEIGHT
 
 """
 Written by Sathvik Kadaveru
@@ -87,11 +87,13 @@ def wave_function_collapse(current_cell, grid):
 
         lowest_entropy = 1000000
         best_cell = None
+        valid_choices_for_best_cell = []
         for adj_cell, valid_values in valid_values_map.items():
             num_valid_values = len(valid_values)
             if num_valid_values < lowest_entropy:
                 lowest_entropy = num_valid_values
                 best_cell = adj_cell
+                valid_choices_for_best_cell = valid_values
 
         if lowest_entropy == 0:
             return False # messed up, need to restart
@@ -99,7 +101,8 @@ def wave_function_collapse(current_cell, grid):
         if best_cell is None:
             return True  # all adjacent cells filled
 
-        grid[best_cell] = randchoice(get_valid_values_for_cell(best_cell, grid))
+        weights = [MODULE_LIST[i].get("weight", DEFAULT_WEIGHT) for i in valid_choices_for_best_cell]
+        grid[best_cell] = randchoice(valid_choices_for_best_cell, weights=weights)[0]
         if not wave_function_collapse(best_cell, grid):
             return False
 
@@ -123,7 +126,7 @@ def main():
     while not success:
         grid = np.full((GRID_H, GRID_W), -1, np.int32)
         first_cell = (randint(0, GRID_H - 1), randint(0, GRID_W - 1))
-        grid[first_cell] = randchoice(get_valid_values_for_cell(first_cell, grid))
+        grid[first_cell] = randchoice(get_valid_values_for_cell(first_cell, grid))[0]
         # print(grid[first_cell])
 
         iteration_number += 1
