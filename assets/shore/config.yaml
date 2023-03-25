@@ -24,7 +24,7 @@ modules:
       b: [ ww ]
       l: [ ww ]
       r: [ ww ]
-    rotations: []
+    rotations: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   sand:
     imageCoords: [1, 5]
     connections:
