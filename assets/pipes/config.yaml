@@ -1,0 +1,8 @@
+---
+name: pipes
+modules:
+  empty:
+    top: []
+    bottom: []
+    left: []
+    right: []

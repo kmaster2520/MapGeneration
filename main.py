@@ -130,16 +130,21 @@ def wave_function_collapse(current_cell, grid):
         min_valid, min_valid_cells = get_num_valid_for_adjacent_cells(
             current_cell, grid
         )
+        # there exists a cell with no valid options
         if min_valid == 0:
-            print("we messed up")
-            return  # we effed up
+            return False
+
+        # all adjacent cells are filled
         if min_valid >= 100000:
-            return  # all adjacent cells filled
+            return True
 
         random_cell = randchoice(list(min_valid_cells.keys()))
         random_value = randchoice(min_valid_cells[random_cell])
         grid[random_cell] = random_value
-        wave_function_collapse(random_cell, grid)
+
+        # return if a failure is found
+        if not wave_function_collapse(random_cell, grid):
+            return False
 
 
 def main():
@@ -149,12 +154,14 @@ def main():
     """
     print("begin main")
 
-    grid = np.full((GRID_H, GRID_W), ".", dtype="U1")
-    first_cell = (randint(0, GRID_H - 1), randint(0, GRID_W - 1))
-    first_cell_value = randchoice(get_valid_values_for_cell(first_cell, grid))
-    grid[first_cell] = first_cell_value
+    success = False
+    while not success:
+        grid = np.full((GRID_H, GRID_W), ".", dtype="U1")
+        first_cell = (randint(0, GRID_H - 1), randint(0, GRID_W - 1))
+        first_cell_value = randchoice(get_valid_values_for_cell(first_cell, grid))
+        grid[first_cell] = first_cell_value
 
-    wave_function_collapse(first_cell, grid)
+        success = wave_function_collapse(first_cell, grid)
 
     print_grid(grid)
 
