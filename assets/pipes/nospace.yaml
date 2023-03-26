@@ -50,7 +50,7 @@ modules:
       r: [ oo ]
     rotations: [90]
   2waybent:
-    imageCoords: [1, 4]
+    imageCoords: [1, 7]
     connections:
       t: [ xx ]
       b: [ oo ]

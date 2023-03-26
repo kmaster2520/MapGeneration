@@ -11,8 +11,8 @@ Written by Sathvik Kadaveru
 """
 
 # can't do more than 30x30
-GRID_W = 50
-GRID_H = GRID_W
+GRID_W = 60
+GRID_H = 40
 
 MODULE_LIST = []
 
