@@ -11,8 +11,8 @@ Written by Sathvik Kadaveru
 """
 
 # can't do more than 30x30
-GRID_W = 25
-GRID_H = 25
+GRID_W = 50
+GRID_H = GRID_W
 
 MODULE_LIST = []
 
@@ -82,9 +82,11 @@ def wave_function_collapse(current_cell, grid):
     :param grid:
     :return:
     """
-    while True:
-        valid_values_map = get_valid_values_for_adjacent_cells(current_cell, grid)
+    cell_stack = [current_cell]
+    while len(cell_stack) > 0:
+        current_cell = cell_stack[-1]
 
+        valid_values_map = get_valid_values_for_adjacent_cells(current_cell, grid)
         lowest_entropy = 1000000
         best_cell = None
         valid_choices_for_best_cell = []
@@ -96,16 +98,17 @@ def wave_function_collapse(current_cell, grid):
                 valid_choices_for_best_cell = valid_values
 
         if lowest_entropy == 0:
-            return False # messed up, need to restart
+            return False  # messed up, need to restart
 
         if best_cell is None:
-            return True  # all adjacent cells filled
+            cell_stack.pop()
+            continue  # all adjacent cells filled
 
         weights = [MODULE_LIST[i].get("weight", DEFAULT_WEIGHT) for i in valid_choices_for_best_cell]
         grid[best_cell] = randchoice(valid_choices_for_best_cell, weights=weights)[0]
-        if not wave_function_collapse(best_cell, grid):
-            return False
+        cell_stack.append(best_cell)
 
+    return True
 
 def main():
     global MODULE_LIST
