@@ -5,7 +5,7 @@ tile:
   height: 16
 connections:
   "o": "empty"
-  "x": "green pipe"
+  "g": "green pipe"
   "r": "red pipe"
 connectivity: 4
 options:
@@ -69,48 +69,66 @@ modules:
   4way:
     imageCoords: [1, 1]
     connections:
-      t: [ xx ]
-      b: [ xx ]
-      l: [ xx ]
-      r: [ xx ]
+      t: [ gg ]
+      b: [ gg ]
+      l: [ gg ]
+      r: [ gg ]
     rotations: []
   4waysplit:
     imageCoords: [1, 6]
     connections:
-      t: [ xx ]
-      b: [ xx ]
-      l: [ xx ]
-      r: [ xx ]
+      t: [ gg ]
+      b: [ gg ]
+      l: [ gg ]
+      r: [ gg ]
     rotations: [90]
   3way:
     imageCoords: [1, 3]
     connections:
-      t: [ xx ]
-      b: [ xx ]
-      l: [ xx ]
+      t: [ gg ]
+      b: [ gg ]
+      l: [ gg ]
       r: [ oo ]
     rotations: [90, 180, 270]
   2waystraight:
     imageCoords: [1, 2]
     connections:
-      t: [ xx ]
-      b: [ xx ]
+      t: [ gg ]
+      b: [ gg ]
       l: [ oo ]
       r: [ oo ]
     rotations: [90]
   2waybent:
     imageCoords: [1, 7]
     connections:
-      t: [ xx ]
+      t: [ gg ]
       b: [ oo ]
-      l: [ xx ]
+      l: [ gg ]
       r: [ oo ]
     rotations: [90, 180, 270]
   4waysplitcolor:
     imageCoords: [2, 5]
     connections:
-      t: [ xx ]
+      t: [ gg ]
       b: [ rr ]
-      l: [ xx ]
+      l: [ gg ]
       r: [ rr ]
+    rotations: [90, 180, 270]
+  2waystraightmix:
+    weight: 40
+    imageCoords: [3, 2]
+    connections:
+      t: [ gg ]
+      b: [ rr ]
+      l: [ oo ]
+      r: [ oo ]
+    rotations: [90, 180, 270]
+  2waybentmix:
+    weight: 40
+    imageCoords: [3, 4]
+    connections:
+      t: [ rr ]
+      b: [ oo ]
+      l: [ gg ]
+      r: [ oo ]
     rotations: [90, 180, 270]
