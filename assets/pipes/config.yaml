@@ -33,6 +33,14 @@ modules:
       l: [ xx ]
       r: [ xx ]
     rotations: []
+  4waysplit:
+    imageCoords: [1, 6]
+    connections:
+      t: [ xx ]
+      b: [ xx ]
+      l: [ xx ]
+      r: [ xx ]
+    rotations: [90]
   3way:
     imageCoords: [1, 3]
     connections:
@@ -50,7 +58,7 @@ modules:
       r: [ oo ]
     rotations: [90]
   2waybent:
-    imageCoords: [1, 4]
+    imageCoords: [1, 7]
     connections:
       t: [ xx ]
       b: [ oo ]
