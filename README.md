@@ -9,3 +9,14 @@ To generate a simple wave function collapse, type:
 ```commandline
 python main.py
 ```
+
+Which would generate and image like:
+![alt text](./samples/pipes.png)
+
+
+Specific configurations can be applied:
+```commandline
+python main.py -c nospace
+```
+Which generates:
+![alt text](./samples/pipes_nospace.png)
