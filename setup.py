@@ -58,7 +58,7 @@ def generate_modules(name, *, config=None):
     return module_list, tile_w, tile_h
 
 
-def display_grid(grid, module_list, tile_size, *, showGrid=False):
+def display_grid(grid, module_list, tile_size, *, showGrid=False, saveGrid=False):
     # Create a Tkinter window and canvas
     shape = grid.shape
 
@@ -66,6 +66,18 @@ def display_grid(grid, module_list, tile_size, *, showGrid=False):
     if showGrid:
         tile_w += 1
         tile_h += 1
+
+    if saveGrid:
+        generated_image = Image.new(mode="RGB", size=(shape[1] * tile_w, shape[0] * tile_h))
+        for r in range(shape[0]):
+            for c in range(shape[1]):
+                if grid[r, c] < 0:
+                    continue
+                image = module_list[grid[r, c]]["image"]
+                generated_image.paste(image, (tile_w * c, tile_h * r))
+        generated_image.save('generated/image.png')
+        return
+
 
     root = tk.Tk()
     canvas = tk.Canvas(root, width=shape[1] * tile_w, height=(shape[0] + 3) * tile_h)

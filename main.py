@@ -117,6 +117,7 @@ def main():
     parser.add_argument("-n", "--name", help="name of pattern to run", default="pipes")
     parser.add_argument("-c", "--config", help="name of config to run", default=None)
     parser.add_argument("--grid", help="show grid lines in image", action="store_true")
+    parser.add_argument("--save", help="save image", action="store_true")
     args = parser.parse_args()
     print(args)
 
@@ -142,7 +143,7 @@ def main():
     # print_grid(grid)
     print(f"Attempt Number: {iteration_number}")
 
-    display_grid(grid, MODULE_LIST, (tile_w, tile_h), showGrid=args.grid)
+    display_grid(grid, MODULE_LIST, (tile_w, tile_h), showGrid=args.grid, saveGrid=args.save)
 
 
 if __name__ == '__main__':
