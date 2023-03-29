@@ -74,7 +74,7 @@ def get_valid_values_for_adjacent_cells(cell, grid):
     return valid_values_map
 
 
-def wave_function_collapse(current_cell, grid):
+def wave_function_collapse(grid):
     """
     Procedurally generates a grid
     Precondition: current_cell has a value
@@ -82,7 +82,10 @@ def wave_function_collapse(current_cell, grid):
     :param grid:
     :return:
     """
-    cell_stack = [current_cell]
+
+    first_cell = (randint(0, GRID_H - 1), randint(0, GRID_W - 1))
+    grid[first_cell] = randchoice(get_valid_values_for_cell(first_cell, grid))[0]
+    cell_stack = [first_cell]
     while len(cell_stack) > 0:
         current_cell = cell_stack[-1]
 
@@ -118,6 +121,7 @@ def main():
     parser.add_argument("-c", "--config", help="name of config to run", default=None)
     parser.add_argument("--grid", help="show grid lines in image", action="store_true")
     parser.add_argument("--save", help="save image", action="store_true")
+    parser.add_argument("--animate", help="animate", action="store_true")
     args = parser.parse_args()
     print(args)
 
@@ -129,12 +133,8 @@ def main():
     grid = np.full((GRID_H, GRID_W), -1, np.int32)
     while not success:
         grid = np.full((GRID_H, GRID_W), -1, np.int32)
-        first_cell = (randint(0, GRID_H - 1), randint(0, GRID_W - 1))
-        grid[first_cell] = randchoice(get_valid_values_for_cell(first_cell, grid))[0]
-        # print(grid[first_cell])
-
         iteration_number += 1
-        success = wave_function_collapse(first_cell, grid)
+        success = wave_function_collapse(grid)
 
         if iteration_number > 30:
             print('no can do')
